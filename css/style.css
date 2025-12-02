@@ -1,0 +1,1285 @@
+@import 'variables.css';
+
+/* --- Font Definitions --- */
+@font-face {
+    font-family: 'Roxborough CF';
+    src: url('../assets/fonts/Roxborough-CF.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Thesignature';
+    src: url('../assets/fonts/Thesignature.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lausanne';
+    src: url('../assets/fonts/Lausanne-300.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Legan';
+    src: url('../assets/fonts/Legan.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter-VariableFont_slnt,wght.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Ovo';
+    src: url('../assets/fonts/Ovo-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Candlefish';
+    src: url('../assets/fonts/Candlefish.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* --- Typography Overrides --- */
+:root {
+    --font-primary: 'Roxborough CF', serif;
+    --font-secondary: 'Lausanne', sans-serif;
+    --font-accent: 'Thesignature', cursive;
+    --font-body: 'Inter', sans-serif;
+    --font-legan: 'Legan', sans-serif;
+    --font-ovo: 'Ovo', serif;
+    --font-candlefish: 'Candlefish', sans-serif;
+}
+
+/* Modern CSS Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    line-height: 1.6;
+    font-family: var(--font-body);
+    background-color: #0a0a0a;
+    color: #f0f0f0;
+    overflow: hidden;
+    /* Prevent body scroll, handle in panels */
+}
+
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* --- Layout Utilities --- */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Split Screen Layout (Desktop) --- */
+.main-layout {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.left-panel {
+    width: 70%;
+    /* Adjust as needed, e.g., 60% or 70% based on image */
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.right-panel {
+    width: 30%;
+    height: 100%;
+    overflow-y: auto;
+    /* Scrollable content */
+    background-color: #0a0a0a;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+/* Hide mobile elements on desktop */
+.mobile-only {
+    display: none;
+}
+
+/* --- Left Panel Content (Static Image) --- */
+.static-hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.static-hero-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Slight overlay */
+    z-index: 1;
+}
+
+.left-panel-footer {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+}
+
+.left-footer-text {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+/* --- Right Panel Desktop Hero (Slideshow) --- */
+.hero-section.desktop-only {
+    height: 100vh;
+    /* Full height of right panel */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    /* Contain slides */
+}
+
+/* Reuse slideshow styles for desktop and mobile hero */
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-slideshow .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.hero-slideshow .slide.active {
+    opacity: 1;
+}
+
+.hero-section.desktop-only::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: #fff;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+
+/* --- Typography --- */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-primary);
+    font-weight: normal;
+    letter-spacing: 0.05em;
+}
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 15px 40px;
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeIn 1s ease-out forwards;
+    min-height: 100vh;
+    /* Full height for all sections */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* --- Hero Typography --- */
+.hero-subtitle {
+    font-family: var(--font-legan);
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 17px;
+    letter-spacing: 1.8px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.hero-title {
+    font-family: var(--font-candlefish);
+    font-size: 40px;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.hero-date {
+    font-family: var(--font-legan);
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 17px;
+    letter-spacing: 1.8px;
+    color: #FFFFFF;
+    margin-top: 10px;
+}
+
+/* --- Guest Overlay --- */
+.guest-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    /* High z-index */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Darker backdrop */
+    backdrop-filter: blur(5px);
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.guest-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.overlay-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.dear-text {
+    font-family: var(--font-legan);
+    font-size: 20px;
+    font-weight: 500;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.guest-name {
+    font-family: var(--font-ovo);
+    font-size: 30px;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.note-text {
+    font-family: var(--font-legan);
+    font-size: 12px;
+    font-weight: 500;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.open-btn {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #252525;
+    background-color: #D5D5D5;
+    border: none;
+    border-radius: 0;
+    padding: 11px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: pulsa 1.5s infinite alternate linear;
+}
+
+.open-btn:hover {
+    color: #FFFFFF;
+    background-color: #525252;
+}
+
+@keyframes pulsa {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+/* Sticky Header (Hidden initially) */
+.sticky-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    /* Align to right panel */
+    width: 30%;
+    /* Match right panel width */
+    padding: 20px;
+    text-align: center;
+    z-index: 90;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: none;
+    /* Implement JS to show on scroll */
+}
+
+.sticky-header-title {
+    font-family: var(--font-ovo);
+    font-size: 17px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 5.5px;
+    color: #FFFFFF;
+}
+
+/* --- Quote Section --- */
+.quote-section {
+    padding: 100px 30px;
+    text-align: left;
+    background-image: url('../assets/images/reveused-imam-nandira-00181.jpg-1.jpeg');
+    /* Placeholder image */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.quote-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 1;
+}
+
+.quote-section .container {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0;
+    /* Left align container */
+}
+
+.quote-section blockquote {
+    font-family: var(--font-legan);
+    font-size: 16px;
+    line-height: 1.6;
+    color: #FFFFFF;
+    margin-bottom: 30px;
+    font-style: normal;
+    text-align: left;
+}
+
+.quote-section cite {
+    font-family: var(--font-primary);
+    /* Roxborough CF */
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+    font-style: normal;
+    display: block;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+/* --- Profile Section --- */
+.profile-section {
+    padding: 30px 30px 250px 30px;
+    text-align: left;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.profile-section.groom {
+    background-image: url('../assets/images/reveused-imam-nandira-00162.jpg.jpeg');
+}
+
+.profile-section.bride {
+    background-image: url('../assets/images/reveused-imam-nandira-00137.jpg.jpeg');
+}
+
+.profile-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+    /* Darker gradient at bottom */
+    z-index: 1;
+}
+
+.profile-section .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+}
+
+.profile-label {
+    font-family: var(--font-legan);
+    /* Or Ovo based on image */
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #FFFFFF;
+    margin-bottom: 15px;
+}
+
+.profile-name {
+    font-family: var(--font-primary);
+    /* Roxborough CF match */
+    font-size: 48px;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    line-height: 1.1;
+}
+
+.profile-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.parents-label {
+    font-family: var(--font-accent);
+    /* Thesignature */
+    font-size: 32px;
+    font-weight: 400;
+    color: #FFFFFF;
+    white-space: nowrap;
+}
+
+.divider {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #FFFFFF;
+    opacity: 0.7;
+}
+
+.profile-description {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    font-weight: 400;
+    color: #DDDDDD;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    max-width: 90%;
+}
+
+.social-btn {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #333333;
+    color: #FFFFFF;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 4px;
+    /* Slight radius */
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+
+.social-btn:hover {
+    background-color: #555;
+    color: #FFF;
+}
+
+/* --- Love Story --- */
+.love-story-section {
+    padding: 100px 30px;
+    background-image: url('../assets/images/reveused-imam-nandira-00148.jpg-1.jpeg');
+    background-size: cover;
+    background-position: center;
+    text-align: left;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.love-story-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* Dark overlay */
+    z-index: 1;
+}
+
+.love-story-section .container {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.love-story-title {
+    font-family: var(--font-primary);
+    /* Roxborough CF */
+    font-size: 56px;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin-bottom: 60px;
+    line-height: 1.1;
+}
+
+.story-item {
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.story-date {
+    font-family: var(--font-primary);
+    font-size: 18px;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.story-text {
+    font-family: var(--font-legan);
+    font-size: 15px;
+    font-weight: 400;
+    color: #DDDDDD;
+    line-height: 1.8;
+    max-width: 600px;
+}
+
+.love-story-footer-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 60px;
+}
+
+.footer-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #FFFFFF;
+    opacity: 0.5;
+    margin-right: 20px;
+    max-width: 200px;
+}
+
+.footer-name {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+}
+
+/* --- Events Section --- */
+.events-section {
+    padding: 10% 10%;
+    text-align: center;
+    background-image: url('../assets/images/reveused-imam-nandira-00141.jpg.jpeg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.events-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(16, 16, 16, 0.45) 0%, rgba(21, 21, 21, 0.58) 100%);
+    z-index: 1;
+}
+
+.events-section .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.events-title-main {
+    font-family: var(--font-candlefish);
+    font-size: 40px;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+.events-date-main {
+    font-family: var(--font-candlefish);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 31px;
+    color: #FFFFFF;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.event-item {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 20px 0;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.event-item:nth-child(1) {
+    animation-delay: 0.5s;
+}
+
+.event-item:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+.event-title {
+    font-family: var(--font-candlefish);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.event-description {
+    font-family: var(--font-legan);
+    font-size: 13px;
+    font-weight: 400;
+    color: #FFFFFF;
+    width: 60%;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.event-btn {
+    font-family: var(--font-legan);
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background-color: #808080;
+    border: none;
+    padding: 10px 13px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+
+.event-btn:hover {
+    color: #9B9B9B;
+    background-color: #808080;
+}
+
+/* --- Countdown --- */
+.countdown-section {
+    padding: 100px 0;
+    text-align: center;
+    background-image: url('../assets/images/reveused-imam-nandira-00152.jpg.jpeg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.countdown-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    /* Overlay */
+    z-index: 1;
+}
+
+.countdown-section .container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.countdown-section h2 {
+    font-family: var(--font-candlefish);
+    font-size: 28px;
+    font-weight: 400;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px 0;
+}
+
+.time-unit span {
+    font-family: var(--font-candlefish);
+    font-size: 40px;
+    display: block;
+    line-height: 1;
+    color: #FFFFFF;
+}
+
+.time-unit {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #DDDDDD;
+}
+
+/* --- RSVP Section --- */
+.rsvp-section {
+    padding: 100px 0;
+    text-align: center;
+    background-image: url('../assets/images/reveused-imam-nandira-00189-copy.jpg.jpeg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.rsvp-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.rsvp-section .container {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.rsvp-section h2 {
+    font-family: var(--font-candlefish);
+    font-size: 28px;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.rsvp-section p {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    color: #DDDDDD;
+    margin-bottom: 40px;
+}
+
+.rsvp-form {
+    background: transparent;
+    /* Or semi-transparent dark */
+    padding: 0;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-family: var(--font-legan);
+    font-size: 14px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea {
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    color: #333;
+    padding: 12px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    border-radius: 0;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    color: #FFFFFF;
+    font-family: var(--font-legan);
+    font-size: 14px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.rsvp-form button[type="submit"] {
+    background-color: #404040;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 30px;
+    font-family: var(--font-legan);
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.rsvp-form button[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* --- Gift Section --- */
+.gift-section {
+    padding: 100px 0;
+    background-color: #0f0f0f;
+    text-align: center;
+}
+
+.gift-section h2 {
+    font-family: var(--font-candlefish);
+    font-size: 36px;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+.gift-section p {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    color: #CCCCCC;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+.bank-account {
+    background: #1a1a1a;
+    padding: 40px;
+    border: 1px solid #333;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+.bank-account p {
+    margin-bottom: 10px;
+    color: #FFFFFF;
+}
+
+.bank-account .account-number {
+    font-family: var(--font-primary);
+    font-size: 32px;
+    margin: 20px 0;
+    letter-spacing: 2px;
+}
+
+.copy-btn {
+    background: transparent;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    font-family: var(--font-legan);
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.copy-btn:hover {
+    background: #FFFFFF;
+    color: #000;
+}
+
+/* --- Wishes Display --- */
+.wishes-display-section {
+    padding: 80px 0;
+    background-color: #0f0f0f;
+    text-align: center;
+}
+
+.wishes-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    gap: 20px;
+}
+
+.wish-item {
+    background: #111;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #222;
+    text-align: left;
+}
+
+.wish-item strong {
+    font-family: var(--font-primary);
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.wish-item p {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* --- Mobile Responsiveness (Vertical Layout) --- */
+@media (max-width: 768px) {
+    body {
+        overflow: auto;
+        /* Allow body scroll on mobile */
+    }
+
+    .main-layout {
+        display: block;
+        /* Stack vertically */
+        width: 100%;
+        height: auto;
+    }
+
+    .left-panel {
+        display: none;
+        /* Hide desktop left panel */
+    }
+
+    .right-panel {
+        width: 100%;
+        height: auto;
+        overflow-y: visible;
+        /* Let body handle scroll */
+    }
+
+    .mobile-only {
+        display: block;
+        /* Show mobile hero */
+    }
+
+    .hero-section.desktop-only {
+        display: none !important;
+        /* Hide desktop hero */
+    }
+
+    .hero-section.mobile-only {
+        display: flex !important;
+        /* Force flex to override .mobile-only block */
+        height: 100vh;
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Remove redundant .hero-slideshow.mobile-slideshow block since general .hero-slideshow covers it */
+
+    .hero-content {
+        /* Revert to original center positioning for mobile */
+        position: absolute;
+        top: 14%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        right: auto;
+    }
+
+    .hero-title {
+        font-size: 40px;
+        /* Original mobile size */
+    }
+
+    .sticky-header {
+        width: 100%;
+        right: auto;
+        left: 0;
+    }
+
+    /* Guest Overlay Mobile */
+    .guest-overlay {
+        position: fixed;
+        /* Cover entire screen */
+        z-index: 9999;
+    }
+
+    /* Other Mobile Adjustments */
+    .profile-section {
+        padding: 30px 20px 100px 20px;
+        /* Increased bottom padding for mobile */
+        background-position: center top;
+    }
+
+    .profile-name {
+        font-size: 32px;
+    }
+
+    .parents-label {
+        font-size: 36px;
+    }
+
+    .love-story-section {
+        padding: 60px 20px;
+    }
+
+    .love-story-title {
+        font-size: 40px;
+        /* Increased size for mobile */
+    }
+
+    .events-section {
+        padding: 60px 20px;
+    }
+
+    .events-title-main {
+        font-size: 32px;
+        width: 100%;
+    }
+
+    .events-date-main {
+        font-size: 20px;
+    }
+
+    .event-description {
+        width: 90%;
+    }
+
+    .countdown-section {
+        padding: 60px 0;
+    }
+
+    .timer {
+        gap: 20px;
+    }
+
+    .time-unit span {
+        font-size: 28px;
+    }
+
+    .time-unit {
+        font-size: 12px;
+    }
+
+    .rsvp-section,
+    .gift-section {
+        padding: 60px 20px;
+    }
+
+    .bank-account {
+        padding: 20px;
+    }
+
+    .bank-account .account-number {
+        font-size: 24px;
+    }
+
+    .quote-section {
+        padding: 60px 20px;
+    }
+}
