@@ -150,6 +150,8 @@ select {
     background-color: #0a0a0a;
     position: relative;
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    /* Snap scrolling */
 }
 
 /* Hide mobile elements on desktop */
@@ -378,18 +380,18 @@ section {
 
 /* --- Guest Overlay --- */
 .guest-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: 70%;
+    /* Mulai dari batas panel kanan (70% dari kiri) */
+    width: 30%;
+    /* Lebar sama dengan panel kanan */
     height: 100%;
     z-index: 100;
-    /* High z-index */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.6);
-    /* Darker backdrop */
     backdrop-filter: blur(5px);
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
@@ -546,7 +548,7 @@ section {
 
 /* --- Profile Section --- */
 .profile-section {
-    padding: 30px 30px 250px 30px;
+    padding: 30px 30px 30px 30px;
     text-align: left;
     background-size: cover;
     background-position: center;
@@ -562,7 +564,7 @@ section {
 }
 
 .profile-section.bride {
-    background-image: url('../assets/images/reveused-imam-nandira-00137.jpg.jpeg');
+    background-image: url('../assets/images/reveused-imam-nandira-00141.jpg.jpeg');
 }
 
 .profile-section::before {
@@ -700,12 +702,12 @@ section {
     font-size: 56px;
     font-weight: 400;
     color: #FFFFFF;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     line-height: 1.1;
 }
 
 .story-item {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     text-align: left;
 }
 
@@ -714,14 +716,14 @@ section {
     font-size: 18px;
     font-weight: 400;
     color: #FFFFFF;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .story-text {
     font-family: var(--font-legan);
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 400;
     color: #DDDDDD;
     line-height: 1.8;
@@ -732,7 +734,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 60px;
+    margin-top: 25px;
 }
 
 .footer-line {
@@ -740,7 +742,7 @@ section {
     height: 1px;
     background-color: #FFFFFF;
     opacity: 0.5;
-    margin-right: 20px;
+    margin-right: 15px;
     max-width: 200px;
 }
 
@@ -976,7 +978,6 @@ section {
 
 .rsvp-form {
     background: transparent;
-    /* Or semi-transparent dark */
     padding: 0;
     text-align: left;
 }
@@ -1040,8 +1041,27 @@ section {
 /* --- Gift Section --- */
 .gift-section {
     padding: 100px 0;
-    background-color: #0f0f0f;
+    background-image: url('../assets/images/gift-bg.jpg');
+    background-size: cover;
+    background-position: center;
     text-align: center;
+    position: relative;
+}
+
+.gift-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.gift-section .container {
+    position: relative;
+    z-index: 2;
 }
 
 .gift-section h2 {
@@ -1115,7 +1135,7 @@ section {
 .wish-item {
     background: #111;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 5px;
     border: 1px solid #222;
     text-align: left;
 }
@@ -1134,152 +1154,1403 @@ section {
 }
 
 /* --- Mobile Responsiveness (Vertical Layout) --- */
+
+/* Mobile Layout - Hide left panel, show only right panel */
 @media (max-width: 768px) {
-    body {
-        overflow: auto;
-        /* Allow body scroll on mobile */
+
+    /* Guest overlay full width on mobile */
+    .guest-overlay {
+        left: 0 !important;
+        width: 100% !important;
+    }
+
+    .left-panel {
+        display: none !important;
+    }
+
+    .right-panel {
+        width: 100% !important;
+        height: 100vh;
+        /* Keep full height for scroll snap */
+
+        overflow-y: auto;
+        /* Keep scroll container for snap */
+
     }
 
     .main-layout {
         display: block;
-        /* Stack vertically */
-        width: 100%;
-        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .thank-you-title {
+        font-size: 22px;
+        margin-bottom: 15px;
+        line-height: 1.3;
     }
 
-    .left-panel {
-        display: none;
-        /* Hide desktop left panel */
+    .thank-you-text {
+        font-size: 11px;
+        padding: 0 30px;
+        margin-bottom: 20px;
+        line-height: 1.5;
     }
 
-    .right-panel {
-        width: 100%;
-        height: auto;
-        overflow-y: visible;
-        /* Let body handle scroll */
+    .footer-couple-name {
+        font-size: 16px;
     }
 
-    .mobile-only {
-        display: block;
-        /* Show mobile hero */
+    .footer-content {
+        margin-bottom: 80px;
+        padding-top: 100px;
     }
 
-    .hero-section.desktop-only {
-        display: none !important;
-        /* Hide desktop hero */
+    .footer-bottom {
+        font-size: 8px;
+        bottom: 20px;
+        padding: 0 15px;
     }
 
-    .hero-section.mobile-only {
-        display: flex !important;
-        /* Force flex to override .mobile-only block */
-        height: 100vh;
-        position: relative;
+    .created-by {
+        margin-bottom: 8px;
+        font-size: 9px;
+    }
+
+    .footer-socials {
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
     }
 
-    /* Remove redundant .hero-slideshow.mobile-slideshow block since general .hero-slideshow covers it */
-
-    .hero-content {
-        /* Revert to original center positioning for mobile */
-        position: absolute;
-        top: 14%;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        right: auto;
+    .footer-socials a {
+        font-size: 8px;
+        gap: 4px;
     }
 
-    .hero-title {
-        font-size: 40px;
-        /* Original mobile size */
-    }
-
-    .sticky-header {
-        width: 100%;
-        right: auto;
-        left: 0;
-    }
-
-    /* Guest Overlay Mobile */
-    .guest-overlay {
-        position: fixed;
-        /* Cover entire screen */
-        z-index: 9999;
-    }
-
-    /* Other Mobile Adjustments */
-    .profile-section {
-        padding: 30px 20px 100px 20px;
-        /* Increased bottom padding for mobile */
-        background-position: center top;
-    }
-
-    .profile-name {
-        font-size: 32px;
-    }
-
-    .parents-label {
-        font-size: 36px;
-    }
-
-    .love-story-section {
-        padding: 60px 20px;
-    }
-
-    .love-story-title {
-        font-size: 40px;
-        /* Increased size for mobile */
-    }
-
-    .events-section {
-        padding: 60px 20px;
-    }
-
-    .events-title-main {
-        font-size: 32px;
-        width: 100%;
-    }
-
-    .events-date-main {
-        font-size: 20px;
-    }
-
-    .event-description {
-        width: 90%;
-    }
-
-    .countdown-section {
-        padding: 60px 0;
-    }
-
-    .timer {
-        gap: 20px;
-    }
-
-    .time-unit span {
-        font-size: 28px;
-    }
-
-    .time-unit {
+    .footer-socials i {
         font-size: 12px;
     }
 
-    .rsvp-section,
-    .gift-section {
-        padding: 60px 20px;
+    .copyright {
+        font-size: 7px;
+        margin-top: 5px;
+    }
+}
+
+
+
+.mobile-only {
+    display: block;
+    /* Show mobile hero */
+}
+
+.hero-section.desktop-only {
+    display: none !important;
+    /* Hide desktop hero */
+}
+
+.hero-section.mobile-only {
+    display: flex !important;
+    /* Force flex to override .mobile-only block */
+    height: 100vh;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Remove redundant .hero-slideshow.mobile-slideshow block since general .hero-slideshow covers it */
+
+.hero-content {
+    /* Revert to original center positioning for mobile */
+    position: absolute;
+    top: 14%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    right: auto;
+}
+
+.hero-title {
+    font-size: 40px;
+    /* Original mobile size */
+}
+
+.sticky-header {
+    width: 100%;
+    right: auto;
+    left: 0;
+}
+
+/* Guest Overlay Mobile */
+.guest-overlay {
+    position: fixed;
+    /* Cover entire screen */
+    z-index: 9999;
+}
+
+/* Other Mobile Adjustments */
+.profile-section {
+    padding: 30px 20px 100px 20px;
+    /* Increased bottom padding for mobile */
+    background-position: center top;
+}
+
+.profile-name {
+    font-size: 32px;
+}
+
+.parents-label {
+    font-size: 36px;
+}
+
+.love-story-section {
+    padding: 60px 20px;
+}
+
+.love-story-title {
+    font-size: 40px;
+    /* Increased size for mobile */
+}
+
+.events-section {
+    padding: 60px 20px;
+}
+
+.events-title-main {
+    font-size: 32px;
+    width: 100%;
+}
+
+.events-date-main {
+    font-size: 20px;
+}
+
+.event-description {
+    width: 90%;
+}
+
+.countdown-section {
+    padding: 60px 0;
+}
+
+.timer {
+    gap: 20px;
+}
+
+.time-unit span {
+    font-size: 28px;
+}
+
+.time-unit {
+    font-size: 12px;
+}
+
+.rsvp-section,
+.gift-section {
+    padding: 60px 20px;
+}
+
+.bank-account {
+    padding: 20px;
+}
+
+.bank-account .account-number {
+    font-size: 24px;
+}
+
+.quote-section {
+    padding: 60px 20px;
+}
+}
+
+/* --- Gallery Section --- */
+.gallery-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.gallery-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 1;
+}
+
+.gallery-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 3;
+}
+
+.gallery-content {
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 4;
+    color: #fff;
+}
+
+.gallery-counter {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-legan);
+    font-size: 14px;
+    letter-spacing: 2px;
+    z-index: 4;
+    color: #fff;
+}
+
+.gallery-text h2 {
+    font-family: var(--font-candlefish);
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.gallery-text p {
+    font-family: var(--font-legan);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 40px;
+    /* Increased size for thin look */
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 0.3s;
+    font-weight: 100;
+    /* Make icon thinner */
+}
+
+.nav-btn:hover {
+    color: #fff;
+}
+
+/* --- Refined Gallery Section (Overrides) --- */
+.gallery-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.gallery-overlay {
+    pointer-events: none;
+}
+
+.gallery-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.gallery-header {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+.gallery-counter {
+    position: static;
+    /* Reset absolute positioning */
+    font-family: var(--font-legan);
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.gallery-instruction {
+    font-family: var(--font-legan);
+    font-size: 12px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+}
+
+.gallery-text {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+.gallery-text h2 {
+    font-family: var(--font-candlefish);
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.gallery-text p {
+    font-family: var(--font-legan);
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+}
+
+.quote-section {
+    padding: 60px 20px;
+}
+}
+
+/* --- Gallery Section --- */
+.gallery-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.gallery-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 1;
+}
+
+.gallery-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 3;
+}
+
+.gallery-content {
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 4;
+    color: #fff;
+}
+
+.gallery-counter {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-legan);
+    font-size: 14px;
+    letter-spacing: 2px;
+    z-index: 4;
+    color: #fff;
+}
+
+.gallery-text h2 {
+    font-family: var(--font-candlefish);
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.gallery-text p {
+    font-family: var(--font-legan);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 40px;
+    /* Increased size for thin look */
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 0.3s;
+    font-weight: 100;
+    /* Make icon thinner */
+}
+
+.nav-btn:hover {
+    color: #fff;
+}
+
+/* --- Refined Gallery Section (Overrides) --- */
+.gallery-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.gallery-overlay {
+    pointer-events: none;
+}
+
+.gallery-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.gallery-header {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+.gallery-counter {
+    position: static;
+    /* Reset absolute positioning */
+    font-family: var(--font-legan);
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.gallery-instruction {
+    font-family: var(--font-legan);
+    font-size: 12px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+}
+
+.gallery-text {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+.gallery-text h2 {
+    font-family: var(--font-candlefish);
+    font-size: 25px;
+
+    font-weight: 400;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.gallery-text p {
+    font-family: var(--font-legan);
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.gallery-nav {
+    padding: 0 20px;
+    pointer-events: none;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 50px;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 0.3s;
+    font-weight: 100;
+    padding: 20px;
+    position: relative;
+    /* Ensure z-index works */
+    z-index: 9999;
+    /* Force on top */
+}
+
+.nav-btn:hover {
+    color: #fff;
+}
+
+/* --- Footer Section --- */
+.footer-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+.footer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 10px;
+    padding-top: 400px;
+}
+
+.thank-you-title {
+    font-family: var(--font-candlefish);
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.thank-you-text {
+    font-family: var(--font-legan);
+    font-size: 13px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.footer-couple-name {
+    font-family: var(--font-candlefish);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.footer-bottom {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    font-family: var(--font-legan);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.created-by {
+    margin-bottom: 10px;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.footer-socials a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+}
+
+.footer-socials i {
+    font-size: 14px;
+}
+
+.copyright {
+    opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+    .thank-you-title {
+        font-size: 22px;
+        margin-bottom: 15px;
+        line-height: 1.3;
     }
 
-    .bank-account {
-        padding: 20px;
+    .thank-you-text {
+        font-size: 11px;
+        padding: 0 30px;
+        margin-bottom: 20px;
+        line-height: 1.5;
     }
 
-    .bank-account .account-number {
-        font-size: 24px;
+    .footer-couple-name {
+        font-size: 16px;
     }
 
-    .quote-section {
-        padding: 60px 20px;
+    .footer-content {
+        margin-bottom: 80px;
     }
+
+    .footer-bottom {
+        font-size: 8px;
+        bottom: 20px;
+        padding: 0 15px;
+    }
+
+    .created-by {
+        margin-bottom: 8px;
+        font-size: 9px;
+    }
+
+    .footer-socials {
+        flex-direction: row;
+        /* Horizontal layout */
+
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+
+    .footer-socials a {
+        font-size: 8px;
+        gap: 4px;
+    }
+
+    .footer-socials i {
+        font-size: 12px;
+    }
+
+    .copyright {
+        font-size: 7px;
+        margin-top: 5px;
+    }
+}
+
+/* --- Scroll Snap (YouTube Shorts / TikTok Style) --- */
+
+
+/* Apply snap alignment to all direct sections in right panel */
+.right-panel>section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    /* Force stop at each section */
+    min-height: 100vh;
+    /* Ensure each section takes full height */
+}
+
+/* Ensure specific sections definitely have snap behavior */
+.hero-section,
+.quote-section,
+.profile-section,
+.love-story-section,
+.events-section,
+.gallery-section,
+.gift-section,
+.footer-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/* --- Wishes Section --- */
+.wishes-section {
+    padding: 80px 20px;
+    background-color: #0a0a0a;
+    color: #fff;
+    text-align: center;
+}
+
+.wishes-section h2 {
+    font-family: var(--font-candlefish);
+    font-size: 36px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.wishes-section p {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+.wishes-container {
+    max-width: 600px;
+    margin: 0 auto;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    /* Custom Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #444 #1a1a1a;
+}
+
+.wishes-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.wishes-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.wishes-container::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 3px;
+}
+
+.wish-item {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: left;
+    border: 1px solid #333;
+}
+
+.wish-name {
+    font-family: var(--font-legan);
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.wish-message {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    line-height: 1.5;
+    color: #ccc;
+}
+
+/* Ensure scroll snap works for this section too */
+.wishes-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* --- Wishes Section Redesign (Overrides) --- */
+.wishes-section {
+    padding: 80px 20px;
+    background-image: url('/assets/images/reveused-imam-nandira-00171.jpg.jpeg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    /* Ensure scroll snap works */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Dark Overlay */
+.wishes-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.wishes-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.wishes-section h2 {
+    font-family: var(--font-candlefish);
+    font-size: 48px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.wishes-section p {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.wishes-container {
+    max-width: 600px;
+    margin: 0 auto;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 10px 20px;
+    /* Custom Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #fff rgba(255, 255, 255, 0.1);
+}
+
+/* Scrollbar styling */
+.wishes-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.wishes-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.footer-socials a {
+    font-size: 8px;
+    gap: 4px;
+}
+
+.footer-socials i {
+    font-size: 12px;
+}
+
+.copyright {
+    font-size: 7px;
+    margin-top: 5px;
+}
+}
+
+/* --- Scroll Snap (YouTube Shorts / TikTok Style) --- */
+
+
+/* Apply snap alignment to all direct sections in right panel */
+.right-panel>section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    /* Force stop at each section */
+    min-height: 100vh;
+    /* Ensure each section takes full height */
+}
+
+/* Ensure specific sections definitely have snap behavior */
+.hero-section,
+.quote-section,
+.profile-section,
+.love-story-section,
+.events-section,
+.gallery-section,
+.gift-section,
+.footer-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/* --- Wishes Section --- */
+.wishes-section {
+    padding: 80px 20px;
+    background-color: #0a0a0a;
+    color: #fff;
+    text-align: center;
+}
+
+.wishes-section h2 {
+    font-family: var(--font-candlefish);
+    font-size: 36px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.wishes-section p {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+.wishes-container {
+    max-width: 600px;
+    margin: 0 auto;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    /* Custom Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #444 #1a1a1a;
+}
+
+.wishes-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.wishes-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.wishes-container::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 3px;
+}
+
+.wish-item {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: left;
+    border: 1px solid #333;
+}
+
+.wish-name {
+    font-family: var(--font-legan);
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.wish-message {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    line-height: 1.5;
+    color: #ccc;
+}
+
+/* Ensure scroll snap works for this section too */
+.wishes-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* --- Wishes Section Redesign (Overrides) --- */
+.wishes-section {
+    padding: 80px 20px;
+    background-image: url('/assets/images/reveused-imam-nandira-00171.jpg.jpeg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    /* Ensure scroll snap works */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Dark Overlay */
+.wishes-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.wishes-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.wishes-section h2 {
+    font-family: var(--font-candlefish);
+    font-size: 48px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.wishes-section p {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.wishes-container {
+    max-width: 600px;
+    margin: 0 auto;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 10px 20px;
+    /* Custom Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #fff rgba(255, 255, 255, 0.1);
+}
+
+/* Scrollbar styling */
+.wishes-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.wishes-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.footer-socials a {
+    font-size: 8px;
+    gap: 4px;
+}
+
+.footer-socials i {
+    font-size: 12px;
+}
+
+.copyright {
+    font-size: 7px;
+    margin-top: 5px;
+}
+}
+
+/* --- Scroll Snap (YouTube Shorts / TikTok Style) --- */
+
+
+/* Apply snap alignment to all direct sections in right panel */
+.right-panel>section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    /* Force stop at each section */
+    min-height: 100vh;
+    /* Ensure each section takes full height */
+}
+
+/* Ensure specific sections definitely have snap behavior */
+.hero-section,
+.quote-section,
+.profile-section,
+.love-story-section,
+.events-section,
+.gallery-section,
+.gift-section,
+.footer-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/* --- Wishes Section --- */
+.wishes-section {
+    padding: 80px 20px;
+    background-color: #0a0a0a;
+    color: #fff;
+    text-align: center;
+}
+
+.wishes-section h2 {
+    font-family: var(--font-candlefish);
+    font-size: 36px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.wishes-section p {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+.wishes-container {
+    max-width: 600px;
+    margin: 0 auto;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    /* Custom Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #444 #1a1a1a;
+}
+
+.wishes-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.wishes-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.wishes-container::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 3px;
+}
+
+.wish-item {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: left;
+    border: 1px solid #333;
+}
+
+.wish-name {
+    font-family: var(--font-legan);
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.wish-message {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    line-height: 1.5;
+    color: #ccc;
+}
+
+/* Ensure scroll snap works for this section too */
+.wishes-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* --- Wishes Section Redesign (Overrides) --- */
+.wishes-section {
+    padding: 80px 20px;
+    background-image: url('/assets/images/reveused-imam-nandira-00171.jpg.jpeg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    /* Ensure scroll snap works */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Dark Overlay */
+.wishes-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.wishes-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.wishes-section h2 {
+    font-family: var(--font-candlefish);
+    font-size: 48px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.wishes-section p {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.wishes-container {
+    max-width: 600px;
+    margin: 0 auto;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 10px 20px;
+    /* Custom Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #fff rgba(255, 255, 255, 0.1);
+}
+
+/* Scrollbar styling */
+.wishes-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.wishes-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.wishes-container::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+.wish-item {
+    background-color: transparent;
+    padding: 3px 0;
+    /* Aggressively reduced padding */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 0;
+    /* No margin between items */
+    text-align: left;
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.wish-name {
+    font-family: var(--font-legan);
+    font-size: 14px;
+    /* Smaller */
+    font-weight: bold;
+    margin-bottom: 0;
+    /* No gap */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.wish-message {
+    font-family: var(--font-legan);
+    font-size: 13px;
+    line-height: 1.3;
+    /* Tighter line height */
+    color: #eee;
+    margin-bottom: 0;
+    /* No gap */
+}
+
+.wish-date {
+    font-size: 9px;
+    opacity: 0.5;
+    margin-top: 2px;
+    display: block;
+    font-family: sans-serif;
+}
+
+.verified-badge {
+    color: #2ecc71;
+    /* Green checkmark */
 }

@@ -18,7 +18,7 @@
         <!-- Left Panel (Desktop Only) -->
         <div class="left-panel">
             <div class="static-hero-image"
-                style="background-image: url('assets/images/reveused-imam-nandira-00204.jpg.jpeg');"></div>
+                style="background-image: url('assets/images/reveused-imam-nandira-00137.jpg.jpeg');"></div>
             <div class="left-panel-footer">
                 <p class="left-footer-text">IMAM NANDIRA</p>
             </div>
@@ -36,7 +36,7 @@
             <section class="hero-section desktop-only" id="desktop-hero">
                 <div class="hero-slideshow">
                     <div class="slide active"
-                        style="background-image: url('assets/images/reveused-imam-nandira-00139.jpg.jpeg');"></div>
+                        style="background-image: url('assets/images/reveused-imam-nandira-00137.jpg.jpeg');"></div>
                     <div class="slide"
                         style="background-image: url('assets/images/reveused-imam-nandira-00162.jpg.jpeg');"></div>
                     <div class="slide"
@@ -61,7 +61,7 @@
             <section class="hero-section mobile-only" id="mobile-hero">
                 <div class="hero-slideshow">
                     <div class="slide active"
-                        style="background-image: url('assets/images/reveused-imam-nandira-00139.jpg.jpeg');"></div>
+                        style="background-image: url('assets/images/reveused-imam-nandira-00137.jpg.jpeg');"></div>
                     <div class="slide"
                         style="background-image: url('assets/images/reveused-imam-nandira-00162.jpg.jpeg');"></div>
                     <div class="slide"
@@ -192,86 +192,6 @@
                 </div>
             </section>
 
-
-
-            <!-- Countdown -->
-            <section class="countdown-section" data-aos="fade-up">
-                <div class="container">
-                    <h2>Counting Down</h2>
-                    <div class="timer" id="countdown">
-                        <div class="time-unit"><span id="days">00</span>DAYS</div>
-                        <div class="time-unit"><span id="hours">00</span>HOURS</div>
-                        <div class="time-unit"><span id="minutes">00</span>MINS</div>
-                        <div class="time-unit"><span id="seconds">00</span>SECS</div>
-                    </div>
-                    <a href="#" class="btn">SAVE THE DATE</a>
-                </div>
-            </section>
-
-
-            <!-- RSVP -->
-            <section class="rsvp-section" data-aos="fade-up">
-                <div class="container">
-                    <h2>RSVP</h2>
-                    <p>Please confirm your attendance.</p>
-                    <form class="rsvp-form" id="rsvp-form">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" id="rsvp-name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Number of Guests</label>
-                            <input type="number" id="rsvp-guests" placeholder="1" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Attendance</label>
-                            <div class="radio-group">
-                                <label><input type="radio" name="attendance" value="yes" checked> Yes, I will
-                                    attend</label>
-                                <label><input type="radio" name="attendance" value="no"> No, I can't attend</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Message / Wish</label>
-                            <textarea id="rsvp-message" placeholder="Write your best wishes..." rows="3"></textarea>
-                        </div>
-                        <button type="submit">SEND MESSAGE</button>
-                    </form>
-                </div>
-            </section>
-
-            <!-- Gift -->
-            <section class="gift-section" data-aos="fade-up"
-                style="background-image: url('assets/images/gift-bg.jpg'); background-size: cover; background-position: center;">
-                <div class="container">
-                    <h2>Wedding Gift</h2>
-                    <p>Your blessing is enough for us, but if you wish to give a gift, you can transfer to:</p>
-                    <div class="bank-account">
-                        <p>BANK BCA</p>
-                        <p class="account-number" id="account-number">1234567890</p>
-                        <p>A/N IMAM</p>
-                        <button class="copy-btn" onclick="copyToClipboard()">COPY ACCOUNT NUMBER</button>
-                    </div>
-                </div>
-            </section>
-
-
-            <!-- Wishes -->
-            <section class="wishes-section" data-aos="fade-up">
-                <div class="container">
-                    <h2>Wishes</h2>
-                    <p>Prayers and wishes from our beloved guests.</p>
-                    <div class="wishes-container" id="wishes-container">
-                        <!-- Wishes will be inserted here dynamically -->
-                        <div class="wish-item">
-                            <h4 class="wish-name">Admin</h4>
-                            <p class="wish-message">Congratulations on your wedding! Wishing you a lifetime of love and
-                                happiness.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <!-- Gallery -->
             <section class="gallery-section" id="gallery">
                 <div class="gallery-slider">
@@ -309,6 +229,7 @@
                 <div class="gallery-content">
                     <div class="gallery-header">
                         <div class="gallery-counter">1 / 10</div>
+                        <div class="gallery-instruction">Click image for preview</div>
                     </div>
                     <div class="gallery-text">
                         <h2>OUR PRE-WEDDING<br>CELEBRATION</h2>
@@ -323,28 +244,64 @@
                 </div>
             </section>
 
-            <!-- Footer Section -->
-            <section class="footer-section"
-                style="background-image: url('assets/images/reveused-imam-nandira-00162.jpg.jpeg');">
-                <div class="footer-overlay"></div>
-                <div class="footer-content">
-                    <h2 class="thank-you-title">THANK YOU FOR YOUR<br>ATTENDANCE</h2>
-                    <p class="thank-you-text">
-                        It is a pleasure and honor for us, if you are willing to attend and<br>
-                        give us your blessing.
-                    </p>
-                    <h3 class="footer-couple-name">IMAM NANDIRA</h3>
-                </div>
-                <div class="footer-bottom">
-                    <p class="created-by">CREATED BY GROOVE PUBLIC</p>
-                    <div class="footer-socials">
-                        <a href="#"><i class="fab fa-whatsapp"></i> +62 813-2757-7133</a>
-                        <a href="#"><i class="fab fa-instagram"></i> GROOVEPUBLIC.ID</a>
-                        <a href="#"><i class="fas fa-globe"></i> GROOVEPUBLIC.COM</a>
+            <!-- Countdown -->
+            <section class="countdown-section" data-aos="fade-up">
+                <div class="container">
+                    <h2>Counting Down</h2>
+                    <div class="timer" id="countdown">
+                        <div class="time-unit"><span id="days">00</span>DAYS</div>
+                        <div class="time-unit"><span id="hours">00</span>HOURS</div>
+                        <div class="time-unit"><span id="minutes">00</span>MINS</div>
+                        <div class="time-unit"><span id="seconds">00</span>SECS</div>
                     </div>
-                    <p class="copyright">&copy; All rights reserved by groovepublic</p>
+                    <a href="#" class="btn">SAVE THE DATE</a>
                 </div>
             </section>
+
+            <!-- RSVP -->
+            <section class="rsvp-section" data-aos="fade-up">
+                <div class="container">
+                    <h2>RSVP</h2>
+                    <p>Please confirm your attendance.</p>
+                    <form class="rsvp-form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Guests</label>
+                            <input type="number" placeholder="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Attendance</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="attendance" value="yes"> Yes, I will attend</label>
+                                <label><input type="radio" name="attendance" value="no"> No, I can't attend</label>
+                            </div>
+                        </div>
+                        <button type="submit">SEND MESSAGE</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Gift -->
+            <section class="gift-section" data-aos="fade-up"
+                style="background-image: url('assets/images/gift-bg.jpg'); background-size: cover; background-position: center;">
+                <div class="container">
+                    <h2>Wedding Gift</h2>
+                    <p>Your blessing is enough for us, but if you wish to give a gift, you can transfer to:</p>
+                    <div class="bank-account">
+                        <p>BANK BCA</p>
+                        <p class="account-number" id="account-number">1234567890</p>
+                        <p>A/N IMAM</p>
+                        <button class="copy-btn" onclick="copyToClipboard()">COPY ACCOUNT NUMBER</button>
+                    </div>
+                </div>
+            </section>
+
+            <footer style="padding: 20px; text-align: center; background: #000; color: #555; font-size: 12px;">
+                &copy; 202X Imam & Nandira. All Rights Reserved.
+            </footer>
 
         </div>
     </div>
